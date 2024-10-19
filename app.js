@@ -51,6 +51,7 @@ for(let box of boxes){
 };
 
 let findWinner = () => {
+    let winner = false; 
     for(let pattern of winPattern){
         const pat1 = pattern[0];
         const pat2 = pattern[1];
@@ -60,16 +61,17 @@ let findWinner = () => {
                 msg.innerText = `Winner is ${boxes[pat1].innerText}`;
                 msgContainer.classList.remove("hide");
                 disableBoxes();
-            } else{
-                if(count === 9){
-                    msg.innerText = `Oops, Draw`;
-                    msgContainer.classList.remove("hide");
-                    disableBoxes();
-                }
-            }
+                winner = true;
+                return;
+            } 
         }
     }
-}
+    // check Draw 
+    if(!winner && count === 9){
+        msg.innerText = `Oops, Draw`;
+        msgContainer.classList.remove("hide");
+    }
+};
 
 resetBtn.addEventListener("click", resetGame);
 newBtn.addEventListener("click", resetGame);
